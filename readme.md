@@ -4,6 +4,14 @@ Reading raw data from Oregon Scientifict WMR300 over usb
 
 Status: Experimental
 
+## Installing
+
+  NodeJS is required
+
+  To install required packages run
+
+    npm install
+
 ## Running
 
     node main.js

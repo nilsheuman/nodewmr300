@@ -3,8 +3,35 @@
 
   "device" : 1,
 
-  "server" : {
-    "url" : "http://www.url.com/file.php",
-    "httpPort" : 80,
+  "web" : {
+    "publish" : false,
+    "host" : "www.url.com",
+    "port" : 80,
+    "path" : "/file.php"
+  },
+
+  "file" : {
+    "publish" : true,
+    "path" : "./",
+    "file" : "wmr300out.txt",
+    "append" : false
+  },
+
+  "ftp" : {
+    "publish" : true,
+
+    "NOTE" : "ftp requires file to be enabled",
+
+    "path" : "/",
+    "file" : "wmr300out.txt",
+    "host" : "ftp.url.com",
+    "port" : 21,
+    "user" : "username",
+    "pass" : "password"
+  },
+
+
+  "publish" : {
+    "interval" : 1
   }
 }

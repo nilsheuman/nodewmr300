@@ -1,0 +1,20 @@
+{
+  "name": "node-wmr300",
+  "version": "0.1.0",
+  "private": false,
+  "author": {
+    "name": "Nils",
+    "email": "nils"
+  },
+  "repository" :
+  {
+    "type" : "git",
+    "url" : "https://github.com/nilsheuman/nodewmr300"
+  },
+  "dependencies": {
+    "node-schedule": "*",
+    "semaphore" : "*",
+    "node-hid" : "*",
+    "jsftp" : "*"
+  }
+}

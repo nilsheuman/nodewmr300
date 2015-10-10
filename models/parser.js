@@ -11,7 +11,8 @@ module.exports = {
 }
 
 /*
-parses the buffer, requires setSpec to have been called
+parses the buffer, requires setSpec to have been called with the specification of
+the data packets
 */
 function parse(buffer) {
   // when reading device with raw_data.py we got the buffer starting with a 0
