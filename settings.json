@@ -1,0 +1,10 @@
+{
+  "environment" : "development",
+
+  "device" : 1,
+
+  "server" : {
+    "url" : "http://www.url.com/file.php",
+    "httpPort" : 80,
+  }
+}
