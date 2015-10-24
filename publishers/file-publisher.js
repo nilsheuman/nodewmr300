@@ -22,5 +22,18 @@ module.exports = {
           //console.log("Wrote to file: " + file + " text: " + text);
       });
     }
+  },
+
+  read : function(callback) {
+    if( settings.file.publish ) {
+      var file = settings.file.path + settings.file.file;
+      
+      fs.readFile(file, 'utf8', function (err, data) {
+        if (err) throw err;
+        var obj = JSON.parse(data);
+        //console.log('read file', obj);
+        callback(obj);
+      });
+    }
   }
 }

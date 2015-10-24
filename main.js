@@ -8,37 +8,35 @@
 
 */
 
-var   
-    settings =      require('./config/settings')
+var 
+    settings      = require('./config/settings')
   , filePublisher = require('./publishers/file-publisher')
-  , webPublisher =  require('./publishers/web-publisher')
-  , ftpPublisher =  require('./publishers/ftp-publisher')
+  , webPublisher  = require('./publishers/web-publisher')
+  , ftpPublisher  = require('./publishers/ftp-publisher')
+  , dataHandler   = require('./models/data-handler')
+  , dataModel     = require('./models/data-model')
+  , debugData     = require('./models/debug-data')
+  , InputHandler  = require('./input/input-handler-socket')
+  , inputHandler  = new InputHandler();
 ;
 
-var dataHandler = require('./models/data-handler');
-var debugData = require('./models/debug-data');
-
-/*
-var HID       = require('node-hid')
-//,   mqtt      = require('mqtt');
-
-// Get a list of all HID devices in the system:
-var devices = HID.devices()
-console.log(devices)
-var device = new HID.HID(1103, 46701);
-
-// read data from the device
-device.on("data", function(data) {
-  var event = parse(data);
+//console.log('cur', dataModel.currentData );
+// read saved data into datamodel
+filePublisher.read(function(data) { 
+  dataModel.currentData = data;
+  console.log('loaded old data', dataModel.currentData);
 });
 
-*/
+inputHandler.on('data', function(buf) { newData(buf); } );
+//inputHandler.listDevices();
+//inputHandler.testa();
+inputHandler.run();
 
 
 
 // debug, fake data input
-setInterval(function() { newData(debugData.fakeWindData() ); }, 900); // org 2.5-3
-setInterval(function() { newData(debugData.fakeTempData() ); }, 500*1); // org 10-12
+//setInterval(function() { newData(debugData.fakeWindData() ); }, 900); // org 2.5-3
+//setInterval(function() { newData(debugData.fakeTempData() ); }, 500*1); // org 10-12
 
 
 // this gets called when we get new data from the device
@@ -53,6 +51,7 @@ var publishModel = function() {
   if( dataHandler.isModelUpdated() ) {
     filePublisher.publish();
     webPublisher.publish();
+    ftpPublisher.publish();
     dataHandler.setModelUpdated(false);
   }
 

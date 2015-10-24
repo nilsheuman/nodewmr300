@@ -12,9 +12,7 @@
     "url" : "https://github.com/nilsheuman/nodewmr300"
   },
   "dependencies": {
-    "node-schedule": "*",
-    "semaphore" : "*",
-    "node-hid" : "*",
+    "python-shell" : "*",
     "jsftp" : "*"
   }
 }

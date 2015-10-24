@@ -27,19 +27,23 @@ module.exports = {
 
     // parse the basic package structure to find event.type
     var event = parser.parse(buf);
-    console.log('newData', 'type', event.type, 'hour', hour, 'minute', minute);
+    console.log('newData*', 'type', event.type, 'hour', hour, 'minute', minute);
+
+    var eventType = event.type + '';
+    eventType = eventType.trim();
 
     // depending on event type, update the corresponding fields in the model
     // also update the history fields for each hour/minute with 
-    switch( event.type ) {
-      case 211 : // temp
+    switch( eventType ) {
+      case '211' : // temp
         dataModel.currentData.updateTime = event.date;
         dataModel.currentData.temp.temp = event.data.temp;
 
         dataModel.currentData.temp.tempHour[hour] = event.data.temp;
         dataModel.currentData.temp.tempMinute[minute] = event.data.temp;
+        console.log('temp', dataModel.currentData.temp.temp);
       break;
-      case 212 : // wind
+      case '212' : // wind
         dataModel.currentData.updateTime = event.date;
         dataModel.currentData.wind.gustspeed = event.data.gustspeed;
         dataModel.currentData.wind.gustdirection = event.data.gustdirection;
@@ -52,9 +56,10 @@ module.exports = {
         dataModel.currentData.wind.gustspeedMinute[minute] = event.data.gustspeed;
         dataModel.currentData.wind.avgspeedMinute[minute] = event.data.avgspeed;
         dataModel.currentData.wind.avgdirMinute[minute] = event.data.avgdir;
+        console.log('wind', dataModel.currentData.wind.avgspeed);
       break;
       default : 
-        console.log('newData unknown event.type', event.type);
+        console.log('newData unknown event.type', event.type, eventType);
       break;
     }
 

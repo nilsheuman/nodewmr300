@@ -1,7 +1,9 @@
 {
   "environment" : "development",
 
-  "device" : 1,
+  "input" : {
+    
+  },
 
   "web" : {
     "publish" : false,
